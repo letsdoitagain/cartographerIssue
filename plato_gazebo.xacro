@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="plato_robot">
+    <gazebo>
+        <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so" >
+            <commandTopic>cmd_vel</commandTopic>
+            <odometryTopic>odom</odometryTopic>
+            <odometryFrame>odom</odometryFrame>
+            <robotBaseFrame>chassis</robotBaseFrame>
+            <publishWheelTF>true</publishWheelTF>
+            <publishWheelJointState>true</publishWheelJointState>
+            <legacyMode>false</legacyMode>
+            <wheelSeparation>0.27</wheelSeparation>
+            <wheelDiameter>0.143</wheelDiameter>
+            <wheelAcceleration>1</wheelAcceleration>
+            <wheelTorque>2</wheelTorque>
+            <updateRate>20</updateRate>
+            <leftJoint>left_wheel_hinge</leftJoint>
+            <rightJoint>right_wheel_hinge</rightJoint>
+            <publishTf>1</publishTf>
+        </plugin>
+    </gazebo>
+
+    <gazebo reference="chassis">
+        <material>Gazebo/Yellow</material>
+    </gazebo>
+    <gazebo reference="left_wheel">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    <gazebo reference="right_wheel">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    <gazebo reference="caster_wheel">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    <gazebo reference="center_bumper">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    <gazebo reference="left_bumper">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    <gazebo reference="right_bumper">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+
+</robot>

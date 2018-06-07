@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="plato">
+    <xacro:include filename="$(find plato_description)/urdf/plato_gazebo.xacro"/>
+    <xacro:include filename="$(find plato_description)/urdf/materials.xacro"/>
+    <xacro:include filename="$(find plato_description)/urdf/parameters.xacro"/>
+    <xacro:include filename="$(find plato_description)/urdf/utils.xacro"/>
+
+
+    <xacro:include filename="$(find plato_description)/urdf/body_parts/body_box.urdf.xacro"/>
+    <body_box name="${base_name}" M="${M}" length_x="${length_x}"
+                                  length_y="${length_y}"
+                                  length_z="${length_z}">
+       <origin xyz="0 0 0" rpy=" 0 0 0"/>
+    </body_box>
+
+
+    <xacro:include filename="$(find plato_description)/urdf/body_parts/wheel.urdf.xacro"/>
+    <wheel parent="${base_name}" name="left_wheel" wheel_radius="${wheel_radius}"
+                            wheel_width="${wheel_width}"
+                            wheel_mass="${wheel_mass}"
+                            wheel_effort_limit="${wheel_effort_limit}"
+                            wheel_velocity_limit="${wheel_velocity_limit}">
+       <origin xyz="${wheel_position_x}
+                    ${wheel_distance/2}
+                    ${caster_position_z + wheel_radius - caster_radius}" rpy="0 0 0"/>
+    </wheel>
+
+    <xacro:include filename="$(find plato_description)/urdf/body_parts/wheel.urdf.xacro"/>
+    <wheel parent="${base_name}" name="right_wheel" wheel_radius="${wheel_radius}"
+                            wheel_width="${wheel_width}"
+                            wheel_mass="${wheel_mass}"
+                            wheel_effort_limit="${wheel_effort_limit}"
+                            wheel_velocity_limit="${wheel_velocity_limit}">
+      <origin xyz="${wheel_position_x}
+                   ${-wheel_distance/2}
+                   ${caster_position_z + wheel_radius - caster_radius}" rpy="0 0 0"/>
+    </wheel>
+
+    <xacro:include filename="$(find plato_description)/urdf/body_parts/caster_wheel.urdf.xacro"/>
+    <caster_wheel parent="${base_name}" name="caster_wheel" caster_mass="${caster_mass}"
+                                                caster_radius="${caster_radius}">
+      <origin xyz="${caster_position_x}
+                   ${caster_position_y}
+                   ${caster_position_z}" rpy="0 0 0"/>
+    </caster_wheel>
+
+    <xacro:include filename="$(find plato_description)/urdf/sensors/VLP-16.urdf.xacro"/>
+    <VLP-16 parent="${base_name}" name="velodyne16" topic="/velodyne_points" hz="${v16_hz}" samples="${v16_samples}">
+      <origin xyz="${v16_pos_x} ${v16_pos_y} ${v16_pos_z}" rpy="0 0 0" />
+    </VLP-16>
+
+    <xacro:include filename="$(find plato_description)/urdf/sensors/camera.urdf.xacro"/>
+    <camera_sensor xyz="${camera_pos_x} ${camera_pos_y} ${camera_pos_z}" rpy="0 0 0" parent="${base_name}"></camera_sensor>
+
+    <xacro:include filename="$(find plato_description)/urdf/sensors/hokuyo.urdf.xacro"/>
+    <hokuyo_sensor xyz="${hokuyo_pos_x} ${hokuyo_pos_y} ${hokuyo_pos_z}" rpy="0 0 0" parent="${base_name}"></hokuyo_sensor>
+
+    <xacro:include filename="$(find plato_description)/urdf/sensors/imu.urdf.xacro"/>
+    <imu_sensor xyz="${imu_pos_x} ${imu_pos_y} ${imu_pos_z}" rpy="0 0 0" parent="${base_name}"></imu_sensor>
+
+    <xacro:include filename="$(find plato_description)/urdf/sensors/bumper.urdf.xacro"/>
+    <bumper parent="${base_name}" name="center_bumper" topic="center_bumper" col_num="3">
+      <origin xyz="0.28 0 -0.1" rpy="0 0 0" />
+    </bumper>
+
+    <xacro:include filename="$(find plato_description)/urdf/sensors/bumper.urdf.xacro"/>
+    <bumper parent="${base_name}" name="right_bumper" topic="right_bumper" col_num="9">
+      <origin xyz="0.22 ${-wheel_distance/2} -0.1" rpy="0 0 ${-M_PI/4}" />
+    </bumper>
+
+    <xacro:include filename="$(find plato_description)/urdf/sensors/bumper.urdf.xacro"/>
+    <bumper parent="${base_name}" name="left_bumper" topic="left_bumper" col_num="7">
+      <origin xyz="0.22 ${wheel_distance/2} -0.1" rpy="0 0 ${M_PI/4}" />
+    </bumper>
+
+    <xacro:include filename="$(find plato_description)/urdf/sensors/sonar.urdf.xacro"/>
+    <sonar_sensor parent="${base_name}" name="center_sonar" ros_topic="/center_sonar"
+                  update_rate="10" min_range="0.3" max_range="2"
+                  field_of_view="56" ray_count="2" >
+      <origin xyz="0.25 0 0" rpy="0 0 0" />
+    </sonar_sensor>
+
+    <xacro:include filename="$(find plato_description)/urdf/sensors/sonar.urdf.xacro"/>
+    <sonar_sensor parent="${base_name}" name="left_sonar" ros_topic="/left_sonar"
+                  update_rate="10" min_range="0.3" max_range="2"
+                  field_of_view="56" ray_count="2" >
+      <origin xyz="0.22 ${(-wheel_distance/2)+0.04} 0" rpy="0 0 ${-M_PI/4}"/>
+    </sonar_sensor>
+
+    <xacro:include filename="$(find plato_description)/urdf/sensors/sonar.urdf.xacro"/>
+    <sonar_sensor parent="${base_name}" name="right_sonar" ros_topic="/right_sonar"
+                  update_rate="10" min_range="0.3" max_range="2"
+                  field_of_view="56" ray_count="2" >
+      <origin xyz="0.22 ${(wheel_distance/2)-0.04} 0" rpy="0 0 ${M_PI/4}"/>
+    </sonar_sensor>
+
+
+</robot>

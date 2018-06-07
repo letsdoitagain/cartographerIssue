@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Chassis properties -->
+  <xacro:property name="base_name" value="chassis"/>
+  <xacro:property name="M" value="5"/>
+  <xacro:property name="length_x" value="0.357"/>
+  <xacro:property name="length_y" value="0.313"/>
+  <xacro:property name="length_z" value="0.267"/>
+  <!-- Differential-drive wheels properties -->
+  <xacro:property name="wheel_radius" value="0.0715"/>
+  <xacro:property name="wheel_width" value="0.028"/>
+  <xacro:property name="wheel_mass" value="0.1"/>
+  <xacro:property name="wheel_position_x" value="0.1"/>
+  <xacro:property name="wheel_distance" value="0.27"/>
+  <xacro:property name="wheel_effort_limit" value="5"/>
+  <xacro:property name="wheel_velocity_limit" value="10"/>
+  <!-- Caster wheel properties -->
+  <xacro:property name="caster_mass" value="0.1"/>
+  <xacro:property name="caster_radius" value="0.0425"/>
+  <xacro:property name="caster_position_x" value="-0.1"/>
+  <xacro:property name="caster_position_y" value="0"/>
+  <xacro:property name="caster_position_z" value="-0.15"/>
+  <!-- Velodyne16 properties -->
+  <xacro:property name="v16_pos_x" value="0"/>
+  <xacro:property name="v16_pos_y" value="0"/>
+  <xacro:property name="v16_pos_z" value="0.2"/>
+  <xacro:property name="v16_hz" value="10"/>
+  <xacro:property name="v16_samples" value="440"/>
+  <!-- Camera properties -->
+  <xacro:property name="camera_pos_x" value="0.18"/>
+  <xacro:property name="camera_pos_y" value="0"/>
+  <xacro:property name="camera_pos_z" value="0"/>
+  <!-- Hokuyo properties -->
+  <xacro:property name="hokuyo_pos_x" value="0.18"/>
+  <xacro:property name="hokuyo_pos_y" value="0"/>
+  <xacro:property name="hokuyo_pos_z" value="0.1"/>
+  <!-- IMU properties -->
+  <xacro:property name="imu_pos_x" value="0.18"/>
+  <xacro:property name="imu_pos_y" value="0"/>
+  <xacro:property name="imu_pos_z" value="0.1"/>
+</robot>
